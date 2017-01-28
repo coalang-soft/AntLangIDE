@@ -1,4 +1,4 @@
-var IDE_VERSION = "2017.01.28";
+var IDE_VERSION = "2017.01.28a";
 
 //Standard libraries
 #include ccl/jui/JUI.cl2
@@ -12,231 +12,231 @@ var IDE_VERSION = "2017.01.28";
 #include "F:/Info/CCL/CoaFX/webLib.ccl"
 
 //JavaFX classes
-var ObjectProperty = java("javafx.beans.property.SimpleObjectProperty");
-var StringProperty = java("javafx.beans.property.SimpleStringProperty");
+var ObjectProperty   = java("javafx.beans.property.SimpleObjectProperty");
+var StringProperty   = java("javafx.beans.property.SimpleStringProperty");
 var ClipboardContent = java("javafx.scene.input.ClipboardContent");
-var Clipboard = java("javafx.scene.input.Clipboard");
-var NumberAxis = JUI.chart("NumberAxis");
-var ImageView = java("javafx.scene.image.ImageView");
-var FileChooser = java("javafx.stage.FileChooser");
-
-//Resources
-var LOGO_URL = "https://rawgit.com/AntLang-Software/logo/master/ant.svg";
+var Clipboard        = java("javafx.scene.input.Clipboard");
+var NumberAxis       = JUI.chart("NumberAxis");
+var ImageView        = java("javafx.scene.image.ImageView");
+var FileChooser      = java("javafx.stage.FileChooser");
 
 def onInputChange(cdf){
-	var antResult = eval.ant(cdf.getValue().get(0).getValue());
-	if(antResult.type == "unknown"){
-		antResult = "{}";
-	}
-	cdf.getValue().get(1).setValue(antResult);
+    var antResult = eval.ant(cdf.getValue().get(0).getValue());
+    if(antResult.type == "unknown"){
+        antResult = "{}";
+    }
+    cdf.getValue().get(1).setValue(antResult);
 }
 
 def textFieldFactory(cdf){
-	var tf = JUI.control("TextField")();
-	tf.textProperty().bindBidirectional(
-		cdf.getValue().get(0)
-	);
-	tf.setOnAction(
-		onInputChange.bind(cdf)
-	);
-	
-	return ObjectProperty(tf);
+    var tf = JUI.control("TextField")();
+    tf.textProperty().bindBidirectional(
+        cdf.getValue().get(0)
+    );
+    tf.setOnAction(
+        onInputChange.bind(cdf)
+    );
+    
+    return ObjectProperty(tf);
 }
 
 def makeItem(){
-	return [
-		calc:StringProperty(""),
-		result:ObjectProperty("Press enter to update the result")
-	];
+    return [
+        calc:StringProperty(""),
+        result:ObjectProperty("Press enter to update the result")
+    ];
 }
 
 def sendToClipboard(txt){
-	var content = ClipboardContent();
-	content.putString(txt);
-	Clipboard.getSystemClipboard().setContent(content);
+    var content = ClipboardContent();
+    content.putString(txt);
+    Clipboard.getSystemClipboard().setContent(content);
 }
 
 def makeCharControl(type, c, text:c.toString()){
-	var charText = c.toString();
-	return JUI.control(type)(
-		text,
-		"onAction" => sendToClipboard.bind(charText)
-	);
+    var charText = c.toString();
+    return JUI.control(type)(
+        text,
+        "onAction" => sendToClipboard.bind(charText)
+    );
 }
 
 def makeConstantControl(type, const){
-	return makeCharControl(type, const, const & "\t(" & eval.ant(const).toString() & ")");
+    return makeCharControl(type, const, const & "\t(" & eval.ant(const).toString() & ")");
 }
 
 def makeButtonBar(table){
-	var newRow = JUI.control("Button")(
-		"add row",
-		"onAction" => <|table.getItems().add(makeItem())>
-	);
-	
-	var hbox = JUI.layout("HBox")([
-		newRow
-	]);
-	
-	if(antChars.type == "string"){
-		hbox.getChildren().add.for(makeCharControl.bind("Button").for(
-			array(antChars.toCharArray())
-		));
-	}
-	
-	return hbox;
+    var newRow = JUI.control("Button")(
+        "add row",
+        "onAction" => <|table.getItems().add(makeItem())>
+    );
+    
+    var hbox = JUI.layout("HBox")([
+        newRow
+    ]);
+    
+    if(antChars.type == "string"){
+        hbox.getChildren().add.for(makeCharControl.bind("Button").for(
+            array(antChars.toCharArray())
+        ));
+    }
+    
+    return hbox;
 }
 
 def addSeries(chart, antLangCode){
-	var func = eval.ant(antLangCode);
-	if(func.type == "unknown"){
-		if(func(integer("-100")).type == "error"){return;}
-		chart.getData().add(
-			XYSeries(
-				<x|x>, func, integer("-100"), 100,
-				antLangCode
-			)
-		);
-	}
+    var func = eval.ant(antLangCode);
+    if(func.type == "unknown"){
+        if(func(integer("-100")).type == "error"){return;}
+        chart.getData().add(
+            XYSeries(
+                <x|x>, func, integer("-100"), 100,
+                antLangCode
+            )
+        );
+    }
 }
 
 def onChartTabSelection(tab, table){
-	if(tab.isSelected()){
-		tab.setContent(JUI.control("Label")("Rendering..."));
-		var chart = JUI.chart("LineChart")(NumberAxis(), NumberAxis());
-		addSeries.bind(chart).for(
-			<i|i.get(0).getValue()>.for(
-				array(table.getItems().toArray())
-			)
-		);
-		tab.setContent(chart);
-	}
+    if(tab.isSelected()){
+        tab.setContent(JUI.control("Label")("Rendering..."));
+        var chart = JUI.chart("LineChart")(NumberAxis(), NumberAxis());
+        addSeries.bind(chart).for(
+            <i|i.get(0).getValue()>.for(
+                array(table.getItems().toArray())
+            )
+        );
+        tab.setContent(chart);
+    }
 }
 
 def loadLibrary(file){
-	var path = file.getAbsolutePath();
-	if(path.type == "string"){
-		var ioFile = File(path);
-		eval.ant(ioFile.buildString());
-	}
+    var path = file.getAbsolutePath();
+    if(path.type == "string"){
+        var ioFile = File(path);
+        eval.ant(ioFile.buildString());
+    }
 }
 
 def makeMenuBar(stage){
 
-	var operatorsMenu = JUI.control("Menu")("Operators");
-	if(antChars.type == "string"){
-		operatorsMenu.getItems().add.for(makeCharControl.bind("MenuItem").for(
-			array(antChars.toCharArray())
-		));
-	}
-	
-	var comparisonMenu = JUI.control("Menu")("Comparison");
-	comparisonMenu.getItems().addAll([
-		makeCharControl("MenuItem", "eq", "eq (equals)"),
-		makeCharControl("MenuItem", "lt", "lt (less than)"),
-		makeCharControl("MenuItem", "gt", "gt (greater than)"),
-		JUI.control("SeparatorMenuItem")(),
-		makeCharControl("MenuItem", "ne", "ne (not equal)"),
-		makeCharControl("MenuItem", "le", "le (less or equal)"),
-		makeCharControl("MenuItem", "ge", "ge (greater or equal)")
-	]);
-	
-	var variablesMenu = JUI.control("Menu")("Variables");
-	variablesMenu.getItems().addAll([
-		makeCharControl("MenuItem", "x", "x (first parameter)"),
-		makeCharControl("MenuItem", "y", "y (second parameter)"),
-		JUI.control("SeparatorMenuItem")(),
-		makeConstantControl("MenuItem", "pi"),
-		makeConstantControl("MenuItem", "tau"),
-		makeConstantControl("MenuItem", "etau"),
-		makeConstantControl("MenuItem", "e")
-	]);
-	
-	var fileMenu = JUI.control("Menu")("File");
-	fileMenu.getItems().addAll([
-		JUI.control("MenuItem")(
-			"Load library...",
-			"onAction" => <|loadLibrary(FileChooser().showOpenDialog(stage))>
-		)
-	]);
-	
-	var bar = JUI.control("MenuBar")([
-		fileMenu,
-		JUI.control("Menu")(
-			"AntLang",
-			ImageView(LOGO_URL),
-			[
-				operatorsMenu,
-				variablesMenu,
-				comparisonMenu
-			]
-		)
-	]);
-	return bar;
+    var operatorsMenu = JUI.control("Menu")("Operators");
+    if(antChars.type == "string"){
+        operatorsMenu.getItems().add.for(makeCharControl.bind("MenuItem").for(
+            array(antChars.toCharArray())
+        ));
+    }
+    
+    var comparisonMenu = JUI.control("Menu")("Comparison");
+    comparisonMenu.getItems().add.for([
+        makeCharControl("MenuItem", "eq", "eq (equals)"),
+        makeCharControl("MenuItem", "lt", "lt (less than)"),
+        makeCharControl("MenuItem", "gt", "gt (greater than)"),
+        JUI.control("SeparatorMenuItem")(),
+        makeCharControl("MenuItem", "ne", "ne (not equal)"),
+        makeCharControl("MenuItem", "le", "le (less or equal)"),
+        makeCharControl("MenuItem", "ge", "ge (greater or equal)")
+    ]);
+    
+    var variablesMenu = JUI.control("Menu")("Variables");
+    variablesMenu.getItems().add.for([
+        makeCharControl("MenuItem", "x", "x (first parameter)"),
+        makeCharControl("MenuItem", "y", "y (second parameter)"),
+        JUI.control("SeparatorMenuItem")(),
+        makeConstantControl("MenuItem", "pi"),
+        makeConstantControl("MenuItem", "tau"),
+        makeConstantControl("MenuItem", "etau"),
+        makeConstantControl("MenuItem", "e")
+    ]);
+    
+    var fileMenu = JUI.control("Menu")("File");
+    fileMenu.getItems().addAll([
+        JUI.control("MenuItem")(
+            "Load library...",
+            "onAction" => <|loadLibrary(FileChooser().showOpenDialog(stage))>
+        )
+    ]);
+    
+    var antLangMenu = JUI.control("Menu")("AntLang");
+    antLangMenu.getItems().add.for([
+        operatorsMenu,
+        variablesMenu,
+        comparisonMenu
+    ]);
+    
+    var bar = JUI.control("MenuBar")();
+    bar.getMenus().add.for([
+        fileMenu,
+        antLangMenu
+    ]);
+    return bar;
 }
 
 //Load AntLang Characters
 var antChars;
 {
-	var charFile = File("antChars.txt");
-	if(charFile.exists()){
-		antChars = charFile.buildString("UTF-8");
-		antChars = antChars.replace(" ", "").trim();
-	}
+    var charFile = File("antChars.txt");
+    if(charFile.exists()){
+        antChars = charFile.buildString("UTF-8");
+        antChars = antChars.replace(" ", "").trim();
+    }
 }
 
 def start(stage){
-	
-	stage.show();
-	stage.setTitle("Downloading AntLang...");
-	#include ccl/eval/AntLang.cl2
-	
-	stage.setTitle("Building UI...");
-	var table = JUI.control("TableView")();
-	var inputColumn = JUI.control("TableColumn")("Input");
-	var outputColumn = JUI.control("TableColumn")("Result");
-	
-	inputColumn.setCellValueFactory(textFieldFactory.bind());
-	table.getColumns().add(inputColumn);
-	
-	outputColumn.setCellValueFactory(<cdf|cdf.getValue().get(1)>);
-	table.getColumns().add(outputColumn);
-	
-	table.getItems().add(makeItem());
-	
-	var chartTab = JUI.control("Tab")(
-		"Chart"
-	);
-	chartTab.selectedProperty().addListener(
-		onChartTabSelection.bind(chartTab, table)
-	);
-	
-	stage.setTitle("Downloading Online IDE...");
-	var onlineIDE = Web("https://antlang-software.github.io/jsAntLang/");
-	
-	stage.setTitle("Finishing...");
-	stage.setScene(
-		JUI.Scene(
-			JUI.layout("BorderPane")(
-				"top" => makeMenuBar(stage),
-				"center" => JUI.control("TabPane")([
-					JUI.control("Tab")(
-						"Table",
-						JUI.layout("BorderPane")(
-							"center" => table,
-							"bottom" => makeButtonBar(table)
-						)
-					),
-					chartTab,
-					JUI.control("Tab")(
-						"Web",
-						onlineIDE
-					)
-				])
-			)
-		)
-	);
-	stage.setTitle("AntLangIDE v" & IDE_VERSION);
+    
+    stage.show();
+    stage.setTitle("Downloading AntLang...");
+    #include ccl/eval/AntLang.cl2
+    
+    stage.setTitle("Building UI...");
+    var table = JUI.control("TableView")();
+    var inputColumn = JUI.control("TableColumn")("Input");
+    var outputColumn = JUI.control("TableColumn")("Result");
+    
+    inputColumn.setCellValueFactory(textFieldFactory.bind());
+    table.getColumns().add(inputColumn);
+    
+    outputColumn.setCellValueFactory(<cdf|cdf.getValue().get(1)>);
+    table.getColumns().add(outputColumn);
+    
+    table.getItems().add(makeItem());
+    
+    var chartTab = JUI.control("Tab")(
+        "Chart"
+    );
+    chartTab.selectedProperty().addListener(
+        onChartTabSelection.bind(chartTab, table)
+    );
+    
+    stage.setTitle("Downloading Online IDE...");
+    var onlineIDE = Web("https://antlang-software.github.io/jsAntLang/");
+    
+    var tabPane = JUI.control("TabPane")();
+    tabPane.getTabs().add.for([
+        JUI.control("Tab")(
+            "Table",
+            "content" => JUI.layout("BorderPane")(
+                "center" => table,
+                "bottom" => makeButtonBar(table)
+            )
+        ),
+        chartTab,
+        JUI.control("Tab")(
+            "Web",
+            "content" => onlineIDE
+        )
+    ]);
+    
+    stage.setTitle("Finishing...");
+    stage.setScene(
+        JUI.Scene(
+            JUI.layout("BorderPane")(
+                "top" => makeMenuBar(stage),
+                "center" => tabPane
+            )
+        )
+    );
+    stage.setTitle("AntLangIDE v" & IDE_VERSION);
 }
 
 Launcher().launch(start, []);
