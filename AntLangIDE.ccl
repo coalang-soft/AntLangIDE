@@ -1,4 +1,4 @@
-var IDE_VERSION = "2017.01.31";
+var IDE_VERSION = "2017.02.05";
 
 //Standard libraries
 #include ccl/jui/JUI.cl2
@@ -20,6 +20,16 @@ var NumberAxis       = JUI.chart("NumberAxis");
 var ImageView        = java("javafx.scene.image.ImageView");
 var FileChooser      = java("javafx.stage.FileChooser");
 
+//Temp
+var lastTextField, lastCaretPosition;
+
+def onTextFieldCaret(tf){
+	if(tf.isFocused()){
+		lastTextField = tf;
+		lastCaretPosition = tf.getCaretPosition();
+	}
+}
+
 def onInputChange(cdf){
     var antResult = eval.ant(cdf.getValue().get(0).getValue());
     if(antResult.type == "unknown"){
@@ -36,6 +46,11 @@ def textFieldFactory(cdf){
     tf.setOnAction(
         onInputChange.bind(cdf)
     );
+    if(stage.DnD.type.equals("error")!){
+    	stage.DnD.handle(tf);
+    }
+    tf.caretPositionProperty().addListener(onTextFieldCaret.bind(tf));
+    tf.focusedProperty().addListener(onTextFieldCaret.bind(tf));
     
     return ObjectProperty(tf);
 }
@@ -53,11 +68,26 @@ def sendToClipboard(txt){
     Clipboard.getSystemClipboard().setContent(content);
 }
 
+def onCharControlAction(charText){
+	sendToClipboard(charText);
+	if(lastTextField.type.equals("undefined")!){
+		var lcp = lastCaretPosition;
+		var ltf = lastTextField;
+		var t1 = ltf.getText().substring(0, lcp);
+		var t2 = ltf.getText().substring(lcp, ltf.getText().length());
+		ltf.requestFocus();
+		if(ltf.isFocused()){
+			ltf.setText(t1 & charText & t2);
+			ltf.positionCaret(lcp + charText.length());
+		}
+	}
+}
+
 def makeCharControl(type, c, text:c.toString()){
     var charText = c.toString();
     return JUI.control(type)(
         text,
-        "onAction" => sendToClipboard.bind(charText)
+        "onAction" => onCharControlAction.bind(charText)
     );
 }
 
@@ -97,6 +127,15 @@ def addSeries(chart, antLangCode){
     }
 }
 
+def onImageDrag(chart){
+	var db = chart.startDragAndDrop(java("javafx.scene.input.TransferMode").ANY);
+	
+	var content = java("javafx.scene.input.ClipboardContent")();
+	content.putImage(chart.snapshot(undefined,undefined));
+	
+	db.setContent(content);
+}
+
 def onChartTabSelection(tab, table){
     if(tab.isSelected()){
         tab.setContent(JUI.control("Label")("Rendering..."));
@@ -106,6 +145,7 @@ def onChartTabSelection(tab, table){
                 array(table.getItems().toArray())
             )
         );
+        chart.setOnDragDetected(onImageDrag.bind(chart));
         tab.setContent(chart);
     }
 }
@@ -293,6 +333,15 @@ def start(stage){
     }
     
     stage.setScene(JUI.Scene(bp));
+    
+    if(stage.DnD.type.equals("error")!){
+    	stage.DnD.ignoreType(java("javafx.scene.control.Label"));
+    	stage.DnD.handle(bp);
+    }
+    
+    if(dndSetup.type == "error"){
+    	println(dndSetup);
+    }
     
     stage.setTitle("AntLangIDE v" & IDE_VERSION);
 }
