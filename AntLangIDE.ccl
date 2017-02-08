@@ -1,4 +1,4 @@
-var IDE_VERSION = "2017.02.05";
+var IDE_VERSION = "2017.02.08";
 
 //Standard libraries
 #include ccl/jui/JUI.cl2
@@ -7,6 +7,7 @@ var IDE_VERSION = "2017.02.05";
 #include ccl/jui/Image.cl2
 #include <Console>
 #include <io/File>
+#include <io/String>
 
 //CoaFX framework
 #include "F:/Info/CCL/CoaFX/webLib.ccl"
@@ -55,9 +56,9 @@ def textFieldFactory(cdf){
     return ObjectProperty(tf);
 }
 
-def makeItem(){
+def makeItem(expression:""){
     return [
-        calc:StringProperty(""),
+        calc:StringProperty(expression),
         result:ObjectProperty("Press enter to update the result")
     ];
 }
@@ -158,6 +159,42 @@ def loadLibrary(file){
     }
 }
 
+def chooseFile(type){
+	var fc = FileChooser();
+	var f = fc["show" & type & "Dialog"](stage);
+	if(f == fc){
+		return undefined;
+	}else{
+		return f;
+	}
+}
+
+def onSave(){
+	var file = chooseFile("Save");
+	if(file.getPath().equals("error")!){
+		var f = File(file.getAbsolutePath());
+		if(f.hasParent()){
+			f.getParent().createDirectory();
+		}
+		var fc = String();
+		fc.writeFormattedString.bind("UTF-8").for(
+			<index|table.getItems().get(index).get(0).getValue() & "\n">
+			.for(0,table.getItems().size() - 1)
+		);
+		f.downloadFrom(fc);
+	}
+}
+
+def onLoad(){
+	var file = chooseFile("Open");
+	if(file.type.equals("undefined")!){
+		var f = File(file.getAbsolutePath());
+		table.getItems().add.for(makeItem.for(array(
+			f.buildString("UTF-8").split("\n")
+		)));
+	}
+}
+
 def makeMenuBar(stage){
 
     var operatorsMenu = JUI.control("Menu")("Operators");
@@ -193,7 +230,15 @@ def makeMenuBar(stage){
     fileMenu.getItems().addAll([
         JUI.control("MenuItem")(
             "Load library...",
-            "onAction" => <|loadLibrary(FileChooser().showOpenDialog(stage))>
+            "onAction" => <|loadLibrary(chooseFile("Open"))>
+        ),
+        JUI.control("MenuItem")(
+        	"Save...",
+        	"onAction" => <|onSave()>
+        ),
+        JUI.control("MenuItem")(
+        	"Load...",
+        	"onAction" => <|onLoad()>
         )
     ]);
     
