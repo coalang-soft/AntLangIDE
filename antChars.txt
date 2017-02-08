@@ -7,7 +7,7 @@ times multiply fundamental
 ÷
 divide fundamental
 |
-
+modulo magnitude
 ^
 power
 ∧
@@ -17,17 +17,17 @@ maximum or
 ,
 catenate
 ⌷
-
+take
 ⌽
 mingle
 ⍴
-
+shape reshape
 ∘
 apply call
 ⍣
-
+appy-n-times until
 '
-
+map each
 ?
 filter
 /
