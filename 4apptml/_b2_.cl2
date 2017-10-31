@@ -1,0 +1,1 @@
+s = JUI.Scene(JUI.layout("Pane")([g]));

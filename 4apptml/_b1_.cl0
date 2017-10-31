@@ -1,0 +1,33 @@
+putS https://rawgit.com/AntLang-Software/jsAntLang/master/AntLang.js
+__mkvar AntLangPath
+load URL
+putS https://rawgit.com/AntLang-Software/jsAntLang/master/AntLang.js
+__invoke1
+get buildString
+putS UTF-8
+__invoke1
+__mkvar jsAntLang
+load eval
+get js
+load jsAntLang
+load concat
+get bind
+invoke1 1
+putS ;new AntLangScriptEngine();
+__invoke1
+__invoke1
+__mkvar antlang
+load eval
+get setProperty
+putS ant
+load antlang
+get run
+__invoke2
+pop
+load eval
+get ant
+get setProperty
+putS engine
+load antlang
+__invoke2
+pop

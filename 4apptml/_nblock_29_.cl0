@@ -1,0 +1,6 @@
+load JUI
+get setProperty
+putS chart
+putM _nblock_30_.cl0
+__invoke2
+pop

@@ -1,0 +1,75 @@
+putM _nblock_3_.cl0
+__mkvar EventHandler
+putA
+putM _nblock_4_.cl0
+__arrpush2 layout
+putM _nblock_5_.cl0
+__arrpush2 control
+putM _nblock_6_.cl0
+__arrpush2 search
+putM _nblock_7_.cl0
+__arrpush2 media
+putM _nblock_8_.cl0
+__arrpush2 image
+__java javafx.scene.Scene
+__arrpush2 Scene
+load EventHandler
+get bind
+__java javafx.event.EventHandler
+__invoke1
+__arrpush2 EventHandler
+__java javafx.stage.FileChooser
+__arrpush2 FileChooser
+__java javafx.scene.text.Font
+__arrpush2 Font
+__setvar JUI
+putM _nblock_9_.cl0
+__mkvar makeImage
+load prototypes
+get object
+get juiImage
+load set
+get bind
+invoke1 1
+load makeImage
+__invoke1
+pop
+load prototypes
+get object
+get juiIcon
+load set
+get bind
+invoke1 1
+load JUI
+get image
+putS ImageView
+__invoke1
+__invoke1
+pop
+load prototypes
+get object
+get juiDisplayImage
+load set
+get bind
+invoke1 1
+putM _nblock_10_.cl0
+__invoke1
+pop
+load prototypes
+get object
+get juiControl
+load set
+get bind
+invoke1 1
+putM _nblock_11_.cl0
+__invoke1
+pop
+load prototypes
+get object
+get juiLayout
+load set
+get bind
+invoke1 1
+putM _nblock_12_.cl0
+__invoke1
+pop

@@ -1,0 +1,10 @@
+putM _nblock_32_.cl0
+__mkvar Series
+load Series
+get bind
+load XYChart
+get Series
+load XYChart
+get Data
+__invoke2
+__setvar XYSeries

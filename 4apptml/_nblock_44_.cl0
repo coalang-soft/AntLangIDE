@@ -1,0 +1,35 @@
+load @
+__mkvar parameters
+load parameters
+get getOrDefault
+putI 0
+load undefined
+__invoke2
+__mkvar line
+load if
+load chr
+get type
+load equals
+get bind
+invoke1 1
+putS undefined
+__invoke1
+__invoke1
+putM _b11_.cl0
+__invoke1
+nnr2
+pop
+load constantControl
+putS Button
+load chr
+__invoke2
+__mkvar btn
+load buttons
+get getChildren
+__invoke0
+get add
+load btn
+__invoke1
+pop
+load undefined
+__setvar chr

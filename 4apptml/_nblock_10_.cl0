@@ -1,0 +1,14 @@
+load @
+__mkvar parameters
+load parameters
+get getOrDefault
+putI 0
+load undefined
+__invoke2
+__mkvar self
+load self
+get juiImage
+__invoke0
+get juiIcon
+__invoke0
+ret

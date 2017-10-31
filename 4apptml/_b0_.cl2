@@ -1,0 +1,1 @@
+res = JUI.image("Image")(in.reader());

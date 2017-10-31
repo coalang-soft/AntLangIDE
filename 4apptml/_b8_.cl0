@@ -1,0 +1,8 @@
+load currentTextField
+get insertText
+load currentTextField
+get getCaretPosition
+__invoke0
+load txt
+__invoke2
+pop

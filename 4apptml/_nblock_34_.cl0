@@ -1,0 +1,24 @@
+load @
+__mkvar parameters
+load parameters
+get getOrDefault
+putI 0
+load undefined
+__invoke2
+__mkvar i
+load s
+get getData
+__invoke0
+get add
+load jData
+load xd
+get property
+load i
+__invoke1
+load yd
+get property
+load i
+__invoke1
+__invoke2
+__invoke1
+ret

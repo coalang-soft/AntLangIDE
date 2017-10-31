@@ -1,0 +1,30 @@
+load @
+__mkvar parameters
+load parameters
+get getOrDefault
+putI 0
+load undefined
+__invoke2
+__mkvar in
+load JUI
+get image
+putS Image
+__invoke1
+load in
+__invoke1
+__mkvar res
+load if
+load res
+get type
+load equals
+get bind
+invoke1 1
+putS error
+__invoke1
+__invoke1
+putM _b0_.cl0
+__invoke1
+nnr2
+pop
+load res
+ret

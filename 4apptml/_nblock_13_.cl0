@@ -1,0 +1,13 @@
+load @
+__mkvar parameters
+load parameters
+get getOrDefault
+putI 0
+load undefined
+__invoke2
+__mkvar expr
+load eval
+get ant
+load expr
+__invoke1
+ret

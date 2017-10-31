@@ -1,0 +1,30 @@
+load eval
+get ant
+load tf
+get getText
+__invoke0
+__invoke1
+__mkvar val
+load if
+load val
+get type
+load equals
+get bind
+invoke1 1
+putS unknown
+__invoke1
+__invoke1
+putM _b9_.cl0
+__invoke1
+nnr2
+pop
+load cdf
+get getValue
+__invoke0
+get get
+putI 1
+__invoke1
+get set
+load val
+__invoke1
+pop

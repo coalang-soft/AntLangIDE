@@ -1,0 +1,1 @@
+currentTextField.insertText(currentTextField.getCaretPosition(), txt);

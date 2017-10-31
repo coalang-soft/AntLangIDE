@@ -1,0 +1,86 @@
+import javafx.beans.property.SimpleObjectProperty;
+#use JUI URL AntLang XYChart
+
+var currentTextField;
+
+var tableTab = tabs.getTabs().get(0);
+var chartTab = tabs.getTabs().get(1);
+chartTab.selectedProperty().addListener({||
+    if(chartTab.isSelected()){
+        println(table);
+        var chart = chartTab.getContent().getCenter();
+        println(chart);
+        chart.getData().clear();
+        for(0, table.getItems().size() - 1){
+            var code = table.getItems().get(@.0).get(0).getValue();
+            println(code);
+            var evaluated = eval.ant(code);
+            println(evaluated);
+            if(evaluated.type == "unknown"){
+                chart.getData().add(
+                    XYSeries(
+                        ({|x| return x;}), evaluated, -100, 100,
+                        code
+                    )
+                );
+            }
+        }
+    }
+});
+
+def newRow(){
+    table.getItems().add([SimpleObjectProperty(""), SimpleObjectProperty("Enter to update Result")]);
+}
+def constantControl(kind, const, info:const){
+    var ctrl = JUI.control(kind)(info);
+    ctrl.onAction = insertText.bind(const);
+    return ctrl;
+}
+def insertText(txt){
+    if((currentTextField.type == "undefined")!){
+        currentTextField.requestFocus();
+        if(currentTextField.isFocused()){
+            currentTextField.insertText(currentTextField.getCaretPosition(), txt);
+        }
+    }
+}
+
+table.columns.get(0).cellValueFactory = ({|cdf|
+    var tf = JUI.control("TextField")();
+    tf.textProperty().bindBidirectional(cdf.getValue().get(0));
+    tf.onAction = ({||
+        var val = eval.ant(tf.getText());
+        if(val.type == "unknown"){
+            val = "{}";
+        }
+        cdf.getValue().get(1).set(val);
+    });
+    tf.focusedProperty().addListener({||
+        if(tf.isFocused()){
+            currentTextField = tf;
+        }
+    });
+    return SimpleObjectProperty(tf);
+});
+table.columns.get(1).cellValueFactory = ({|cdf|
+    return cdf.getValue().get(1);
+});
+
+var antchars = URL("https://raw.githubusercontent.com/coalang-soft/AntLangIDE/master/antChars.txt").buildString("UTF-8").split("\n");
+
+buttons.getChildren().add(JUI.control("Button")(
+    "Add row",
+    "onAction" => newRow.bind()
+));
+var chr;
+({|line|
+    if(chr.type == "undefined"){
+        chr = line;
+        return null;
+    }
+    var btn = constantControl("Button",chr);
+    buttons.getChildren().add(btn);
+    chr = undefined;
+}).for(antchars);
+
+newRow();

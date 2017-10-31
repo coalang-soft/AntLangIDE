@@ -1,0 +1,15 @@
+load @
+__mkvar parameters
+load parameters
+get getOrDefault
+putI 0
+load undefined
+__invoke2
+__mkvar name
+load java
+putS javafx.scene.chart.
+get concat
+load name
+__invoke1
+__invoke1
+ret

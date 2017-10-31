@@ -1,0 +1,45 @@
+load @
+__mkvar parameters
+load parameters
+get getOrDefault
+putI 0
+load undefined
+__invoke2
+__mkvar cdf
+load JUI
+get control
+putS TextField
+__invoke1
+__invoke0
+__mkvar tf
+load tf
+get textProperty
+__invoke0
+get bindBidirectional
+load cdf
+get getValue
+__invoke0
+get get
+putI 0
+__invoke1
+__invoke1
+pop
+load tf
+get onAction
+load set
+get bind
+invoke1 1
+putM _nblock_41_.cl0
+__invoke1
+pop
+load tf
+get focusedProperty
+__invoke0
+get addListener
+putM _nblock_42_.cl0
+__invoke1
+pop
+load SimpleObjectProperty
+load tf
+__invoke1
+ret

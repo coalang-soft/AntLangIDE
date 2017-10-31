@@ -1,0 +1,15 @@
+load @
+__mkvar parameters
+load parameters
+get getOrDefault
+putI 0
+load undefined
+__invoke2
+__mkvar cdf
+load cdf
+get getValue
+__invoke0
+get get
+putI 1
+__invoke1
+ret

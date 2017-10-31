@@ -1,0 +1,16 @@
+load @
+__mkvar parameters
+load parameters
+get getOrDefault
+putI 0
+load undefined
+__invoke2
+__mkvar gui
+load gui
+get juiApp
+__invoke0
+get launch
+__invoke0
+pop
+load gui
+ret

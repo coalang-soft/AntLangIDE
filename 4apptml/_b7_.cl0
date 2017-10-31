@@ -1,0 +1,12 @@
+load currentTextField
+get requestFocus
+__invoke0
+pop
+load if
+load currentTextField
+get isFocused
+__invoke0
+__invoke1
+putM _b8_.cl0
+__invoke1
+nnr2

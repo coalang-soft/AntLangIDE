@@ -1,0 +1,41 @@
+load @
+__mkvar parameters
+load parameters
+get getOrDefault
+putI 0
+load undefined
+__invoke2
+__mkvar win
+load gui
+__invoke0
+__mkvar g
+load JUI
+get Scene
+load g
+__invoke1
+__mkvar s
+load if
+load s
+get type
+load equals
+get bind
+invoke1 1
+putS error
+__invoke1
+__invoke1
+putM _b2_.cl0
+__invoke1
+nnr2
+pop
+load win
+get scene
+load set
+get bind
+invoke1 1
+load s
+__invoke1
+pop
+load win
+get show
+__invoke0
+pop

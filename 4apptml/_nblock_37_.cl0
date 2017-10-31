@@ -1,0 +1,15 @@
+load table
+get getItems
+__invoke0
+get add
+putA
+load SimpleObjectProperty
+putS
+__invoke1
+__arrpush1
+load SimpleObjectProperty
+putS Enter to update Result
+__invoke1
+__arrpush1
+__invoke1
+pop

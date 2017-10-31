@@ -1,0 +1,10 @@
+load @
+__mkvar parameters
+load parameters
+get getOrDefault
+putI 0
+load undefined
+__invoke2
+__mkvar gui
+putM _nblock_16_.cl0
+ret

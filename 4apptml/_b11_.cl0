@@ -1,0 +1,4 @@
+load line
+__setvar chr
+load null
+ret

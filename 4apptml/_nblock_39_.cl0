@@ -1,0 +1,22 @@
+load @
+__mkvar parameters
+load parameters
+get getOrDefault
+putI 0
+load undefined
+__invoke2
+__mkvar txt
+load if
+load currentTextField
+get type
+load equals
+get bind
+invoke1 1
+putS undefined
+__invoke1
+load not
+invoke1 1
+__invoke1
+putM _b7_.cl0
+__invoke1
+nnr2

@@ -1,0 +1,55 @@
+load @
+__mkvar parameters
+load parameters
+get getOrDefault
+putI 0
+load undefined
+__invoke2
+__mkvar jSeries
+load parameters
+get getOrDefault
+putI 1
+load undefined
+__invoke2
+__mkvar jData
+load parameters
+get getOrDefault
+putI 2
+load undefined
+__invoke2
+__mkvar name
+load parameters
+get getOrDefault
+putI 3
+load undefined
+__invoke2
+__mkvar xd
+load parameters
+get getOrDefault
+putI 4
+load undefined
+__invoke2
+__mkvar yd
+load jSeries
+__invoke0
+__mkvar s
+load s
+get setName
+load name
+__invoke1
+pop
+putM _nblock_34_.cl0
+get for
+putI 0
+load xd
+get length
+__invoke0
+load sub
+get bind
+invoke1 1
+putI 1
+__invoke1
+__invoke2
+pop
+load s
+ret

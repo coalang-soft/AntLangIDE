@@ -1,0 +1,20 @@
+load @
+__mkvar parameters
+load parameters
+get getOrDefault
+putI 0
+load undefined
+__invoke2
+__mkvar clss
+load parameters
+get getOrDefault
+putI 1
+load undefined
+__invoke2
+__mkvar func
+load clss
+putA
+load func
+__arrpush2 handle
+__invoke1
+ret

@@ -1,0 +1,12 @@
+load JUI
+get Scene
+load JUI
+get layout
+putS Pane
+__invoke1
+putA
+load g
+__arrpush1
+__invoke1
+__invoke1
+__setvar s

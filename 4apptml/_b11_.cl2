@@ -1,0 +1,2 @@
+chr = line;
+return null;

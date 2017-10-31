@@ -1,0 +1,8 @@
+load if
+load chartTab
+get isSelected
+__invoke0
+__invoke1
+putM _b4_.cl0
+__invoke1
+nnr2

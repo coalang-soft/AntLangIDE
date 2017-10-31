@@ -1,0 +1,38 @@
+load table
+get getItems
+__invoke0
+get get
+load @
+get 0
+__invoke1
+get get
+putI 0
+__invoke1
+get getValue
+__invoke0
+__mkvar code
+__println_f
+load code
+__invoke1
+pop
+load eval
+get ant
+load code
+__invoke1
+__mkvar evaluated
+__println_f
+load evaluated
+__invoke1
+pop
+load if
+load evaluated
+get type
+load equals
+get bind
+invoke1 1
+putS unknown
+__invoke1
+__invoke1
+putM _b6_.cl0
+__invoke1
+nnr2

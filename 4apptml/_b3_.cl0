@@ -1,0 +1,9 @@
+load JUI
+get image
+putS Image
+__invoke1
+load in
+get reader
+__invoke0
+__invoke1
+__setvar res

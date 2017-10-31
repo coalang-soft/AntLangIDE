@@ -1,0 +1,36 @@
+__println_f
+load table
+__invoke1
+pop
+load chartTab
+get getContent
+__invoke0
+get getCenter
+__invoke0
+__mkvar chart
+__println_f
+load chart
+__invoke1
+pop
+load chart
+get getData
+__invoke0
+get clear
+__invoke0
+pop
+load for
+putI 0
+load table
+get getItems
+__invoke0
+get size
+__invoke0
+load sub
+get bind
+invoke1 1
+putI 1
+__invoke1
+__invoke2
+putM _b5_.cl0
+__invoke1
+nnr2

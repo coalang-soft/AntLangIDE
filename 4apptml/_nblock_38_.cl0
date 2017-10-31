@@ -1,0 +1,40 @@
+load @
+__mkvar parameters
+load parameters
+get getOrDefault
+putI 0
+load undefined
+__invoke2
+__mkvar kind
+load parameters
+get getOrDefault
+putI 1
+load undefined
+__invoke2
+__mkvar const
+load parameters
+get getOrDefault
+putI 2
+load const
+__invoke2
+__mkvar info
+load JUI
+get control
+load kind
+__invoke1
+load info
+__invoke1
+__mkvar ctrl
+load ctrl
+get onAction
+load set
+get bind
+invoke1 1
+load insertText
+get bind
+load const
+__invoke1
+__invoke1
+pop
+load ctrl
+ret

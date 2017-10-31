@@ -1,0 +1,13 @@
+load chart
+get getData
+__invoke0
+get add
+load XYSeries
+putM _nblock_36_.cl0
+load evaluated
+putI -100
+putI 100
+load code
+invoke 5
+__invoke1
+pop

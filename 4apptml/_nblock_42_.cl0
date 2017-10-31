@@ -1,0 +1,8 @@
+load if
+load tf
+get isFocused
+__invoke0
+__invoke1
+putM _b10_.cl0
+__invoke1
+nnr2
