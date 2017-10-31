@@ -1,0 +1,224 @@
+__java javafx.beans.property.SimpleObjectProperty
+__mkvar SimpleObjectProperty
+putA
+load undefined
+get getPrototype
+__invoke0
+__arrpush2 undefined
+putA
+get getPrototype
+__invoke0
+__arrpush2 array
+putI 0
+get getPrototype
+__invoke0
+__arrpush2 number
+putS
+get getPrototype
+__invoke0
+__arrpush2 string
+putM _nblock_1_.cl0
+get getPrototype
+__invoke0
+__arrpush2 function
+putI 0
+get getObjectPrototype
+__invoke0
+__arrpush2 object
+__mkvar prototypes
+__mkvar_u JUI
+putM _nblock_2_.cl0
+duplicate
+__invoke0
+nnr
+pop
+__java cpa.subos.io.IO
+get url
+__mkvar URL
+load prototypes
+get string
+get url
+load set
+get bind
+invoke1 1
+load URL
+__invoke1
+pop
+load if
+load eval
+get ant
+get type
+load equals
+get bind
+invoke1 1
+putS error
+__invoke1
+__invoke1
+putM _b1_.cl0
+__invoke1
+nnr2
+pop
+load prototypes
+get object
+get ant
+load set
+get bind
+invoke1 1
+putM _nblock_13_.cl0
+__invoke1
+pop
+__java ccl.rt.v6.fx.FXLauncher
+__mkvar Launcher
+load prototypes
+get function
+get launch
+load set
+get bind
+invoke1 1
+load Launcher
+get launch
+__invoke1
+pop
+load prototypes
+get function
+get launchSimple
+load set
+get bind
+invoke1 1
+putM _nblock_14_.cl0
+__invoke1
+pop
+load prototypes
+get object
+get juiApp
+load set
+get bind
+invoke1 1
+putM _nblock_15_.cl0
+__invoke1
+pop
+load prototypes
+get object
+get launch
+load set
+get bind
+invoke1 1
+putM _nblock_17_.cl0
+__invoke1
+pop
+__java javafx.embed.swing.JFXPanel
+__invoke0
+pop
+__mkvar_u JUI
+putM _nblock_18_.cl0
+duplicate
+__invoke0
+nnr
+pop
+putM _nblock_29_.cl0
+duplicate
+__invoke0
+nnr
+pop
+load JUI
+get chart
+putS XYChart
+__invoke1
+__mkvar XYChart
+__mkvar_u XYSeries
+putM _nblock_31_.cl0
+duplicate
+__invoke0
+nnr
+pop
+__mkvar_u currentTextField
+load tabs
+get getTabs
+__invoke0
+get get
+putI 0
+__invoke1
+__mkvar tableTab
+load tabs
+get getTabs
+__invoke0
+get get
+putI 1
+__invoke1
+__mkvar chartTab
+load chartTab
+get selectedProperty
+__invoke0
+get addListener
+putM _nblock_35_.cl0
+__invoke1
+pop
+putM _nblock_37_.cl0
+__mkvar newRow
+putM _nblock_38_.cl0
+__mkvar constantControl
+putM _nblock_39_.cl0
+__mkvar insertText
+load table
+get columns
+get get
+putI 0
+__invoke1
+get cellValueFactory
+load set
+get bind
+invoke1 1
+putM _nblock_40_.cl0
+__invoke1
+pop
+load table
+get columns
+get get
+putI 1
+__invoke1
+get cellValueFactory
+load set
+get bind
+invoke1 1
+putM _nblock_43_.cl0
+__invoke1
+pop
+load URL
+putS https://raw.githubusercontent.com/coalang-soft/AntLangIDE/master/antChars.txt
+__invoke1
+get buildString
+putS UTF-8
+__invoke1
+get split
+putS \n
+__invoke1
+__mkvar antchars
+load buttons
+get getChildren
+__invoke0
+get add
+load JUI
+get control
+putS Button
+__invoke1
+putS Add row
+putS onAction
+load nvp
+get bind
+invoke1 1
+load newRow
+get bind
+__invoke0
+__invoke1
+__invoke2
+__invoke1
+pop
+__mkvar_u chr
+putM _nblock_44_.cl0
+get for
+load antchars
+__invoke1
+pop
+load newRow
+__invoke0
+pop

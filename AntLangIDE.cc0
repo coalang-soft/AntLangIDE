@@ -1,0 +1,405 @@
+sPut F:/Info/CCL/AntLangIDE/AntLangIDE.ccl
+reserve IDE_VERSION
+putS 2017.02.08
+store
+reserve JUI
+pop
+newscope
+reserve new
+putM __new_1__.cl0
+store
+reserve layout
+putM __layout_2__.cl0
+store
+load layout
+load new
+get bind
+load layout
+get _
+putA 0
+invoke 2
+store
+reserve control
+putM __control_3__.cl0
+store
+load control
+load new
+get bind
+load control
+get _
+putA 0
+invoke 2
+store
+reserve search
+putM __search_4__.cl0
+store
+load search
+load new
+get bind
+load search
+get _
+putA 0
+invoke 2
+store
+reserve image
+putM __image_5__.cl0
+store
+load image
+load new
+get bind
+load image
+get _
+putA 0
+invoke 2
+store
+reserve media
+putM __media_6__.cl0
+store
+load media
+load new
+get bind
+load media
+get _
+putA 0
+invoke 2
+store
+reserve EventHandler
+putM __EventHandler_7__.cl0
+store
+load JUI
+putA 0
+get push
+load layout
+putS layout
+invoke 2
+get push
+load control
+putS control
+invoke 2
+get push
+load search
+putS search
+invoke 2
+get push
+load media
+putS media
+invoke 2
+get push
+load image
+putS image
+invoke 2
+get push
+load java
+putS javafx.scene.Scene
+invoke 1
+putS Scene
+invoke 2
+get push
+load EventHandler
+get bind
+load java
+putS javafx.event.EventHandler
+invoke 1
+invoke 1
+putS EventHandler
+invoke 2
+get push
+load java
+putS javafx.stage.FileChooser
+invoke 1
+putS FileChooser
+invoke 2
+get push
+load java
+putS javafx.scene.text.Font
+invoke 1
+putS FileChooser
+invoke 2
+store
+oldscope
+reserve Launcher
+putM __Launcher_8__.cl0
+store
+newscope
+reserve chart
+putM __chart_11__.cl0
+store
+load JUI
+get setProperty
+putS chart
+load chart
+invoke 2
+pop
+oldscope
+reserve XYChart
+load JUI
+get chart
+putS XYChart
+invoke 1
+store
+reserve XYSeries
+pop
+newscope
+reserve Series
+putM __Series_12__.cl0
+store
+load XYSeries
+load Series
+get bind
+load XYChart
+get Series
+load XYChart
+get Data
+invoke 2
+store
+oldscope
+reserve Image
+putM __Image_14__.cl0
+store
+reserve println
+pop
+reserve printf
+pop
+reserve print
+pop
+reserve read
+pop
+newscope
+reserve System
+load java
+putS java.lang.System
+invoke 1
+store
+load System
+get out
+duplicate
+get println
+load println
+store1
+duplicate
+get printf
+load printf
+store1
+duplicate
+get print
+load print
+store1
+pop
+load read
+load java
+putS java.util.Scanner
+invoke 1
+load System
+get in
+invoke 1
+get nextLine
+store
+oldscope
+reserve IOBase
+putM __IOBase_15__.cl0
+store
+reserve File
+putM __File_21__.cl0
+store
+load File
+load File
+get _
+get extend
+load IOBase
+get _
+invoke 1
+store
+reserve String
+putM __String_25__.cl0
+store
+load String
+load String
+get extend
+load IOBase
+invoke 1
+store
+newscope
+reserve StringExtension
+putM __StringExtension_30__.cl0
+store
+load String
+load String
+get extend
+load StringExtension
+invoke 1
+store
+oldscope
+reserve Web
+putM __Web_31__.cl0
+store
+reserve ObjectProperty
+load java
+putS javafx.beans.property.SimpleObjectProperty
+invoke 1
+store
+reserve StringProperty
+load java
+putS javafx.beans.property.SimpleStringProperty
+invoke 1
+store
+reserve ClipboardContent
+load java
+putS javafx.scene.input.ClipboardContent
+invoke 1
+store
+reserve Clipboard
+load java
+putS javafx.scene.input.Clipboard
+invoke 1
+store
+reserve NumberAxis
+load JUI
+get chart
+putS NumberAxis
+invoke 1
+store
+reserve ImageView
+load java
+putS javafx.scene.image.ImageView
+invoke 1
+store
+reserve FileChooser
+load java
+putS javafx.stage.FileChooser
+invoke 1
+store
+reserve lastTextField
+pop
+reserve lastCaretPosition
+pop
+reserve onTextFieldCaret
+putM __onTextFieldCaret_32__.cl0
+store
+reserve onInputChange
+putM __onInputChange_33__.cl0
+store
+reserve textFieldFactory
+putM __textFieldFactory_34__.cl0
+store
+reserve makeItem
+putM __makeItem_35__.cl0
+store
+reserve sendToClipboard
+putM __sendToClipboard_36__.cl0
+store
+reserve onCharControlAction
+putM __onCharControlAction_37__.cl0
+store
+reserve makeCharControl
+putM __makeCharControl_38__.cl0
+store
+reserve makeConstantControl
+putM __makeConstantControl_39__.cl0
+store
+reserve makeButtonBar
+putM __makeButtonBar_40__.cl0
+store
+reserve addSeries
+putM __addSeries_41__.cl0
+store
+reserve onImageDrag
+putM __onImageDrag_42__.cl0
+store
+reserve onChartTabSelection
+putM __onChartTabSelection_43__.cl0
+store
+reserve loadLibrary
+putM __loadLibrary_44__.cl0
+store
+reserve chooseFile
+putM __chooseFile_45__.cl0
+store
+reserve onSave
+putM __onSave_46__.cl0
+store
+reserve onLoad
+putM __onLoad_47__.cl0
+store
+reserve makeMenuBar
+putM __makeMenuBar_48__.cl0
+store
+reserve antChars
+pop
+reserve charInfos
+putA 0
+store
+newscope
+reserve charFile
+load File
+putS antChars.txt
+invoke 1
+store
+load charFile
+get exists
+invoke 0
+if _if_110_
+newscope
+load charInfos
+get push
+load array
+load line
+get trim
+invoke 0
+get split
+putS  \
+invoke 1
+invoke 1
+invoke 1
+pop
+load requireChar
+putI 1
+store
+oldscope
+goto _if_110_end_
+mark _if_110_
+newscope
+load antChars
+putS 
+store
+reserve lines
+load array
+load charFile
+get buildString
+putS UTF-8
+invoke 1
+get split
+putS \n
+invoke 1
+invoke 1
+store
+load lines
+putM _anon12_.cl0
+get for
+load lines
+invoke 1
+store
+reserve requireChar
+putI 1
+store
+reserve process
+putM __process_49__.cl0
+store
+load process
+get for
+load lines
+invoke 1
+pop
+oldscope
+mark _if_110_end_
+oldscope
+reserve start
+putM __start_50__.cl0
+store
+load Launcher
+invoke 0
+get launch
+load start
+putA 0
+invoke 2
+pop
+sPop
